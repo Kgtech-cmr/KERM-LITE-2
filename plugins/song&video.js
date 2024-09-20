@@ -11,12 +11,12 @@ cmd({
 },
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
-if(!q) return reply("*කරුණාකර Link එකක් හො නමක් ලබා දෙන්න 🔎...*")
+if(!q) return reply("_Downloading 🔎..._")
 const search = await yts(q)
 const data = search.videos[0]
 const url = data.url
 
-let desc = `*◆ GHOST-MD SONG DOWNLOADING..... ◆*
+let desc = `*◆ KERM-LITE-2 SONG DOWNLOADING..... ◆*
 
 | ➤ TITLE - ${data.title}
 
@@ -28,7 +28,7 @@ let desc = `*◆ GHOST-MD SONG DOWNLOADING..... ◆*
 
 |➤ AGO - ${data.ago}
 
- ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɢʜᴏꜱᴛ-ᴍᴅ
+ ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ Kᴇʀᴍ-Lɪᴛᴇ-2
 `
 await conn.sendMessage(from,{image:{url: data.thumbnail},caption:desc},{quoted:mek});
 
@@ -56,12 +56,12 @@ cmd({
 },
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
-if(!q) return reply("*කරුණාකර Link එකක් හො නමක් ලබා දෙන්න 🔎...*")
+if(!q) return reply("_Downloading🔎..._")
 const search = await yts(q)
 const data = search.videos[0]
 const url = data.url
 
-let des = `*◆ GHOST-MD VIDEO DOWNLOADING.....◆*
+let des = `*◆ KERM-LITE-2 VIDEO DOWNLOADING.....◆*
 
 | ➤ TITLE - ${data.title}
 
@@ -73,7 +73,7 @@ let des = `*◆ GHOST-MD VIDEO DOWNLOADING.....◆*
 
 | ➤ AGO - ${data.ago}
 
-©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɢʜᴏꜱᴛ-ᴍᴅ
+©ᴘᴏᴡᴇʀᴇᴅ ʙʏ Kᴇʀᴍ-Lɪᴛᴇ-2
 `
 await conn.sendMessage(from,{image:{url: data.thumbnail},caption:des},{quoted:mek});
 
