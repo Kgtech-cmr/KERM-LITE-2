@@ -47,6 +47,7 @@ async (conn, mek, m, { from, isOwner, quoted, reply }) => {
 // 6. Clear All Chats
 cmd({
     pattern: "clearchats",
+    alias: ["clear"],
     desc: "Clear all chats from the bot.",
     category: "owner",
     react: "🧹",
@@ -59,7 +60,7 @@ async (conn, mek, m, { from, isOwner, reply }) => {
         for (const chat of chats) {
             await conn.modifyChat(chat.jid, 'delete');
         }
-        reply("🧹 All chats cleared successfully!");
+        reply("_Cleared_");
     } catch (error) {
         reply(`❌ Error clearing chats: ${error.message}`);
     }
