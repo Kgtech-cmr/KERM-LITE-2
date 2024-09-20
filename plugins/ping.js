@@ -14,7 +14,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const message = await conn.sendMessage(from, { text: '𝗣𝗶𝗻𝗴𝗶𝗻𝗴...' })
         const endTime = Date.now()
         const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `*📍𝗚𝗛𝗢𝗦𝗧-𝗠𝗗 𝗦𝗣𝗘𝗘𝗗 : ${ping}ms*` }, { quoted: message })
+        await conn.sendMessage(from, { text: `*📍𝗞𝗘𝗥𝗠-𝗟𝗜𝗧𝗘-𝟮 𝗦𝗣𝗘𝗘𝗗 : ${ping}ms*` }, { quoted: message })
     } catch (e) {
         console.log(e)
         reply(`${e}`)
