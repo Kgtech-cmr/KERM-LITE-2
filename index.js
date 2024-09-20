@@ -67,9 +67,9 @@ require("./plugins/" + plugin);
 }
 });
 console.log('Plugins installed successful ✅')
-console.log('Bot connected to whatsapp ✅')
+console.log('Kerm Lite 2 connected to whatsapp ✅')
 
-let up = `GHOST-MD connected successful ✅\n\nPREFIX: ${prefix}`;
+let up = `Kerm Lite 2 connected successful ✅\n\nPREFIX: ${prefix}`;
 
 conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/397000a07a1deb7fad9c2.jpg` }, caption: up })
 
@@ -143,7 +143,7 @@ if(!isOwner && !isGroup && config.MODE === "groups") return
 
 if(senderNumber.includes("94741140620")){
 if(isReact) return
-m.react("👻")
+m.react("🥂")
 }
 
 const events = require('./command')
@@ -180,7 +180,7 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
 })
 }
 app.get("/", (req, res) => {
-res.send("hey, ghost started✅");
+res.send("hey, Kerm Lite 2 started✅");
 });
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 setTimeout(() => {
