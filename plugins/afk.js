@@ -27,20 +27,20 @@ System({
 	if (!AFK.isAfk)  return;
 	if(!message.mention.isBotNumber && !message.reply_message.i && message.isGroup)  return;
 	if (message.mention.isBotNumber && message.isGroup) {
-   	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+   	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n est malheureusement pas là pour le moment.⏰```\n' +
 		              (AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
 		    	      (AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 			      quoted: message.data
 			    });
 	} else if (message.isGroup && message.reply_message.sender == message.user.jid) {
-	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n est malheureusement pas là pour le moment.⏰```\n' +
 			      (AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
 			      (AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 			      quoted: message.data
 			   });
 
 	} else if(!message.isGroup) {
-	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n est malheureusement pas là pour le moment.⏰```\n' +
 				(AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
 				(AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 				quoted: message.data
