@@ -1,18 +1,18 @@
 {
-    "name": "Jarvis",
+    "name": "KermLite2",
     "version":"1.0.0",
-    "description": "Jarvis Multi Device whatsappbot",
-    "logo": "https://i.imgur.com/PmfMtfa.jpeg",
+    "description": "Kerm Multi Device whatsappbot",
+    "logo": "https://i.imgur.com/8X1vjbQ.jpeg",
     "keywords": ["whatsapp"],
-    "repository": "https://github.com/Loki-Xer/Jarvis",
+    "repository": "https://github.com/Kgtech-cmr/KERM-LITE-2",
     "website": "https://github.com/Loki-Xer/Jarvis",
     "success_url": "/",
     "stack": "container",
     "env": {
         "BOT_INFO": {
-            "description": "botname;ownername;image url",
+            "description": "Nom du bot;Nom de l'utilisateur;Lien l'image du bot",
             "required": true,
-            "value":"ᴊᴀʀᴠɪꜱ;ʟᴏᴋɪ-xᴇʀ;https://i.imgur.com/VIpl3q5.mp4"
+            "value":"қ૯ЯறԼіҬ૯2;𝙺𝙶 𝚃𝙴𝙲𝙷✖‿✖•;https://i.imgur.com/IQeeX6g.mp4"
         },
         "MENU_FONT": {
             "description": "type;plugin name, have to be less than 35",
@@ -20,84 +20,84 @@
             "value":"3;8"
         },
         "AUDIO_DATA": {
-            "description": "audio package name",
+            "description": "Nom du package audio",
             "required": true,
-            "value":"ʟᴏᴋɪ-xᴇʀ;ᴊᴀʀᴠɪꜱ;https://i.imgur.com/VgxJeCm.jpeg"
+            "value":"𝙺𝙶 𝚃𝙴𝙲𝙷✖‿✖•;қ૯ЯறԼіҬ૯2;https://i.imgur.com/8X1vjbQ.jpeg"
         },
         "WARN_COUNT": {
-            "description": "warn count",
+            "description": "Compte d'avertissement",
             "required": true,
             "value":"3"
         },
         "MEDIA_DATA": {
-            "description": "media data that uses in list",
+            "description": "Données multimédias utilisées dans la liste",
             "required": true,
-            "value":"ʟɪꜱᴛ ᴍᴇɴᴜ;ᴊᴀʀᴠɪꜱ-ᴍᴅ;https://i.imgur.com/ltPPMTh.jpeg"
+            "value":"ʟɪꜱᴛ ᴍᴇɴᴜ;қ૯ЯறԼіҬ૯2;https://i.imgur.com/8X1vjbQ.jpeg"
         },
         "HANDLER": {
-            "description": "handler for bot. all so can be null or false",
+            "description": "Prefix du bot ex:.,/ ou null",
             "required": true,
             "value":"null"
         },
         "SESSION_ID": {
-            "description": "session id",
+            "description": "Session",
             "required": true
         },
         "WORK_TYPE": {
-            "description": "worker type public or private",
+            "description": "Bot public ou privé",
             "required": true,
             "value":"private"
         },
         "HEROKU_APP_NAME": {
-            "description": "heroku app name, same as above entered",
+            "description": "Nom de l'application heroku, le même que celui entré ci-dessus",
             "required": true
         },
         "HEROKU_API_KEY": {
-            "description": "Heroku account api key, https://dashboard.heroku.com/account",
+            "description": "Clé API du compte Heroku, https://dashboard.heroku.com/account",
             "required": true
         },
         "STICKER_PACKNAME": {
-            "description": "sticker package name",
+            "description": "Nom de l'emballage autocollant",
             "required": true,
-            "value":"ʟᴏᴋɪ;ᴊᴀʀᴠɪꜱ"
+            "value":"қ૯ЯறԼіҬ૯2;𝙺𝙶 𝚃𝙴𝙲𝙷✖‿✖•"
         },
         "SUDO": {
-            "description": "owner number of the bot",
+            "description": "Numéro de propriétaire du bot",
             "required": false,
-            "value":"4915252819677"
+            "value":""
         },
         "ALLWAYS_ONLINE": {
-            "description": "show bot number last seen as online",
+            "description": "Afficher le numéro du bot vu pour la dernière fois en ligne",
             "required": false,
             "value":"false"
         },
         "READ_MSG": {
-            "description": "Read all messages",
+            "description": "Lire tous les messages",
             "required": false,
             "value":"false"
         },
         "SAVE_STATUS": {
-            "description": "save all status message",
-            "required": false,
-            "value":"null"
-        },
-        "STATUS_VIEW": {
-            "description": "status views use true for view all status or use only-view=jid to only view given jid status or use not-view=jid to not view the one person status and view anothers",
+            "description": "Enregistrer tous les statuts",
             "required": false,
             "value":"false"
         },
+        "STATUS_VIEW": {
+            "description": "Pour voir automatiquement les statuts, met 'false' pour désactiver et 'true' pour activer",
+            "required": false,
+            "value":"true"
+        },
         "REJECT_CALL": {
-            "description": "automatic reject call",
+            "description": "Appel de rejet automatique",
             "required": true,
             "value":"false"
         },
         "ERROR_MSG": {
-            "description": "send error messages to bot number",
+            "description": "Envoyer des messages d'erreur au numéro du bot",
             "required": true,
             "value":"false"
         },
         "BAN_CHATS": {
-            "description": "ban chat from useing bot value: jid1,jid2",
+            "description": "Interdire le chat d'utiliser la valeur du bot : jid1,jid2",
             "required": false,
             "value":""
         }
