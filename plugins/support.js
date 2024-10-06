@@ -1,11 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
-
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -13,15 +11,15 @@ Jarvis - Loki-Xer
 const { getJson, getBuffer, System, isPrivate, sleep } = require("../lib/");
 
 System({
-    pattern: "help",
+    pattern: "aide",
     fromMe: isPrivate,
-    desc: "jarvis-md support",
+    desc: "Kerm-lite support",
     type: "support"
 }, async (message) => {
-    const name = 'ɪʀᴏɴ ᴍᴀɴ 🎓', title = "ᴊᴀʀᴠɪꜱ ꜱᴜᴩᴩᴏʀᴛ 🪄", number = '4915252819677', body = "ɪʀᴏɴ ᴍᴀɴ";
-    const image = "https://graph.org/file/58ea74675af7836579a3a.jpg", sourceUrl = 'https://github.com/Loki-Xer/Jarvis-md';
+    const name = 'ɪʀᴏɴ ᴍᴀɴ 🎓', title = "ᴋᴇʀᴍ ꜱᴜᴩᴩᴏʀᴛ 🪄", number = '237656520674', body = "ɪʀᴏɴ ᴍᴀɴ";
+    const image = "https://i.imgur.com/8X1vjbQ.jpeg", sourceUrl = 'https://github.com/kgtech-cmr/KERM-LITE-2';
     const logo = await getBuffer(image);
-    const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nORG: powered by Jarvis-md;\nTEL;type=CELL;type=VOICE;waid=${number}:${number}\nEND:VCARD`;
+    const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nORG: Alimenté par Kg-Tech;\nTEL;type=CELL;type=VOICE;waid=${number}:${number}\nEND:VCARD`;
     const adon = { title, body, thumbnail: logo, mediaType: 1, mediaUrl: sourceUrl, sourceUrl, showAdAttribution: true, renderLargerThumbnail: false };
     await message.client.sendMessage(message.chat, { contacts: { displayName: name, contacts: [{ vcard }] }, contextInfo: { externalAdReply: adon } }, { quoted: message });
 });
@@ -29,12 +27,12 @@ System({
 System({
     pattern: "allplugin",
     fromMe: isPrivate,
-    desc: "To get all plugin of jarvis-md",
+    desc: "To get all plugin of Kerm-lite",
     type: "support"
 }, async (message) => {
     const allPluginsData = await getJson('https://api-loki-ser-1o2h.onrender.com/api/jarvis/allplugin');
     const externalPluginsData = await getJson('https://api-loki-ser-1o2h.onrender.com/api/jarvis/plugin');
-    const image = await getBuffer("https://graph.org/file/30ab5e1e228a9636ce7f5.jpg");
+    const image = await getBuffer("https://i.imgur.com/8X1vjbQ.jpeg");
     const formatPluginData = (pluginData) => {
         return Object.entries(pluginData).map(([key, value]) => `*${key}:* ${value.url}`).join('\n\n');
     };
