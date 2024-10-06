@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -45,7 +44,7 @@ System({
     desc: 'Find details of a song',
     type: 'search',
 }, async (message, match, m) => {
-    if (!message.reply_message || (!message.reply_message.audio && !message.reply_message.video)) return await message.reply('*Reply to audio or video*');
+    if (!message.reply_message || (!message.reply_message.audio && !message.reply_message.video)) return await message.reply('*Reponds à un audio ou video*');
     const p = await message.reply_message.downloadAndSave();
     const options = {
        host: 'identify-eu-west-1.acrcloud.com',
@@ -88,6 +87,6 @@ System({
     const { album, release_date, artists, title } = metadata.music[0];
     const yt = await Ytsearch(title);
 
-    const cap = `*_${yt.title}_*\n\n\n*Album :* ${album.name || ''}\n*Artists :* ${artists !== undefined ? artists.map((v) => v.name).join(', ') : ''}\n*Release Date :* ${release_date}\n\n\`\`\`1.⬢\`\`\` *audio*\n\`\`\`2.⬢\`\`\` *video*\n\n_*Send a number as a reply to download*_`
+    const cap = `*_${yt.title}_*\n\n\n*Album :* ${album.name || ''}\n*Artistes:* ${artists !== undefined ? artists.map((v) => v.name).join(', ') : ''}\n*Date de sortie:* ${release_date}\n\n\`\`\`1.⬢\`\`\` *audio*\n\`\`\`2.⬢\`\`\` *video*\n\n_*Envoyez un numéro en réponse pour télécharger.*_`
     await message.send({ url: yt.image }, { caption: cap }, "image");
 });
