@@ -58,7 +58,7 @@ System({
 	AFK.lastseen = 0;
 	AFK.reason = false;
 	AFK.isAfk = false;
-	await message.send('```Euh...Je ne suis plus AFK!🙍🏾```');
+	await message.send('```Euhhhh Je ne suis plus AFK!🙍🏾```');
 });
 
 System({
