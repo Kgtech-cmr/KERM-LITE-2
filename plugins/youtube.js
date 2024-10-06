@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -76,7 +75,7 @@ System({
   type: 'youtube',
 }, async (message, match) => {
   const sq = match || extractUrlFromMessage(message.reply_message?.text);
-  if (!sq) return message.reply("*Need a video URL or query.*");
+  if (!sq) return message.reply("*Besoin d'un lien d'une vidéo ou d'une requête\nExemple: video Tiakola TIA.*");
   
   let url = sq;
   if (!isUrl(sq)) {
@@ -89,8 +88,8 @@ System({
   }
   var res = await fetch(IronMan(`ironman/dl/ytdl2?url=${url}`));
   var dataa = await res.json();
-  if (!dataa) return await message.reply("*No suitable video found.*");
-  await message.reply(`- *Downloading ${dataa.title}...*`);
+  if (!dataa) return await message.reply("*Aucune vidéo appropriée trouvée.*");
+  await message.reply(`- *Téléchargement ${dataa.title}...*`);
   await message.sendFromUrl(dataa.video, { quoted: message });
 });
 
@@ -100,11 +99,11 @@ System({
   desc: 'Download YouTube videos',
   type: 'youtube',
 }, async (message, match) => {
-  if (!match) return await message.reply('Please provide a valid YouTube URL.');
+  if (!match) return await message.reply('Veuillez fournir un lien YouTube valide.');
   var data = await youtube(match);
   if (!data.download || data.download.length === 0) return await message.reply('No download links found.');
   let qualities = data.download.map((item, index) => `${index + 1}. ${item.quality}`).join('\n');
-  await message.reply(`*_${data.title}_*\n\nAvailable qualities:\n${qualities}\n\n*Reply with the number to download the video in that quality*\n✧${match}`);
+  await message.reply(`*_${data.title}_*\n\nQualités disponibles:\n${qualities}\n\n*Répondez avec le numéro pour télécharger la vidéo dans cette qualité*\n✧${match}`);
 });
 
 System({
@@ -119,12 +118,12 @@ System({
   var data = await youtube(match);
   if (isNaN(qualitylist) || qualitylist < 1 || qualitylist > data.download.length) return;
   const q = data.download[qualitylist - 1];
-  await message.reply(`Downloading *${data.title}* in *${q.quality}*, please wait...`);
+  await message.reply(`Téléchargement *${data.title}* dans *${q.quality}*, veuillez patienter...`);
   await message.client.sendMessage(message.chat, {
     video: {
       url: q.download
     },
-    caption: `*${data.title}*\n\nQuality: ${q.quality}`,
+    caption: `*${data.title}*\n\nQualité: ${q.quality}`,
   });
 });
 
@@ -157,14 +156,14 @@ System({
   type: 'youtube',
 }, async (message, match) => {
     var url = match || (message.reply_message && message.reply_message.text);
-    if (!url || !isUrl(url)) return await message.reply("*Need a valid video URL.*");
+    if (!url || !isUrl(url)) return await message.reply("*Besoin d'un lien d'une vidéo valide.*");
     var aud = await youtube(url);
-    if (!aud.audio || aud.audio.length === 0) return await message.reply("No audio available for this video.");
+    if (!aud.audio || aud.audio.length === 0) return await message.reply("Aucun audio disponible pour cette vidéo.");
     var title = aud.title || "audio";
     var artist = aud.artist || "Unknown Artist";
     var image = aud.image || "https://graph.org/file/58ea74675af7836579a3a.jpg";
     if (config.AUDIO_DATA !== "original") [artist, title, image] = config.AUDIO_DATA.split(';').map((v, i) => v || [artist, title, image][i]);
-    await message.reply(`Downloading *${aud.title}*, please wait...`);
+    await message.reply(`Téléchargement *${aud.title}*, veuillez patienter...`);
     var [audbuff, imgbuff] = await Promise.all([getBuffer(aud.audio[0].download), getBuffer(image)]);
     var fek = await AddMp3Meta(audbuff, imgbuff, { title, body: artist });
     await message.reply(fek, { mimetype: 'audio/mpeg' }, "audio");
@@ -182,21 +181,21 @@ System({
     url = match.includes("--thumbnail") ? (await Ytsearch(match.replace("--thumbnail", "").trim())).url : (isUrl(match) ? match : (await Ytsearch(match)).url);
   } else if (message.reply_message && message.reply_message.text) {
     url = extractUrlFromMessage(message.reply_message.text);
-    if (!url) return await message.reply("*No URL found in the replied message.*");
+    if (!url) return await message.reply("*Aucun lien trouvée dans le message répondu.*");
   }
   
-  if (!url) return await message.reply("*Need a song URL or query.*\n_Use --thumbnail at end if you want video thumbnail_");
+  if (!url) return await message.reply("*Besoin d'un lien de chanson ou d'une requête.*\n_Exemple: song Jolagreen23 4BULLDOGS_");
   var aud = await youtube(url);
-  if (!aud || !aud.audio || aud.audio.length === 0) return await message.reply("No audio available for this video.");
+  if (!aud || !aud.audio || aud.audio.length === 0) return await message.reply("Aucun audio disponible pour cette vidéo.");
   var { title = "audio", artist = "Unknown Artist", image = "https://graph.org/file/58ea74675af7836579a3a.jpg" } = aud;
   if (config.AUDIO_DATA !== "original") [artist, title, image] = config.AUDIO_DATA.split(';').map((v, i) => v || [artist, title, image][i]);
   var audbuff = await AddMp3Meta(await getBuffer(aud.audio[0].download), await getBuffer(image), { title, body: artist });
   var isThumbnail = match && match.includes("--thumbnail");
   if (isThumbnail) {
-    await message.client.sendMessage(message.chat, { image: { url: aud.image }, caption: `Downloading *${aud.title}*, please wait...` }, { quoted: message });
+    await message.client.sendMessage(message.chat, { image: { url: aud.image }, caption: `Téléchargement *${aud.title}*, veuillez patienter...` }, { quoted: message });
     await message.reply(audbuff, { mimetype: 'audio/mpeg' }, "audio");
   } else {
-    await message.send(`Downloading *${aud.title}*, please wait...`);
+    await message.send(`Téléchargement *${aud.title}*, veuillez patienter...`);
     await message.client.sendMessage(message.chat, {
       audio: audbuff,
       mimetype: 'audio/mpeg',
@@ -341,14 +340,14 @@ System({
        type: "search",
   }, async (message, match) => {
       if (!match) {
-        return await message.reply('_Please provide an *Query*');
+        return await message.reply('_Veuillez fournir une *une requête*');
       } else {
         if (isUrl(match)) {
-          return await message.reply("_Not a *Url* Please provide an *Query*");
+          return await message.reply("_Pas un *Lien* Veuillez fournir une *requête*");
         } else {
           const videos = await yts(match);
-          const result = videos.all.map(video => `*🏷️ Title :* _*${video.title}*_\n*📁 Duration :* _${video.duration}_\n*🔗 Link :* _${video.url}_`);
-          return await message.reply(`\n\n_*Result Of ${match} 🔍*_\n\n`+result.join('\n\n')+"\n\n*🤍 صنع بواسطة لوكي*")
+          const result = videos.all.map(video => `*🏷️ Titre :* _*${video.title}*_\n*📁 Duré :* _${video.duration}_\n*🔗 Lien :* _${video.url}_`);
+          return await message.reply(`\n\n_*Resultat de ${match} 🔍*_\n\n`+result.join('\n\n')+"\n\n*🤍KermLord*")
         }
       }
   });
