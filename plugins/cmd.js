@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
+
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -25,12 +25,12 @@ System({
     type: "tool",
 }, async (message, match) => { 
     if (!message.reply_message || !message.reply_message.i || !message.reply_message.msg || !message.reply_message.msg.fileSha256) 
-    return await message.reply('_Reply to an image/video/audio/sticker_'); 
+    return await message.reply('_Reponds à une image/video/audio/sticker_'); 
     if (!match) return await message.reply('_Example: setcmd ping_'); 
     const hash = message.reply_message.msg.fileSha256.join("");
     const setcmd = await setData(hash, match, "true", "setCmd");
-    if (!setcmd) return await message.reply('_Failed_');
-    await message.reply('_Success_');
+    if (!setcmd) return await message.reply('_Echec_');
+    await message.reply('_Succès_');
 });
 
 System({
@@ -40,12 +40,12 @@ System({
     type: 'tool'
 }, async (message, match) => {
     if (!message.reply_message || !message.reply_message.i) 
-    return await message.reply('_Reply to an image/video/audio/sticker_');
+    return await message.reply('_Reponds à une image/video/audio/sticker_');
     let hash = message.reply_message.msg.fileSha256.join("")
-    if (!hash) return await message.reply('_Failed_');
+    if (!hash) return await message.reply('_Echec_');
     const delcmd = await removeData(hash, "setCmd");
-    if (!delcmd) return await message.reply('_Failed_');
-    await message.reply('_Success_');
+    if (!delcmd) return await message.reply('_Echec_');
+    await message.reply('_Succes_');
 });
 
 System({
@@ -55,8 +55,8 @@ System({
     type: 'tool'
 }, async (message, match) => {
     const result = await database.findAll({ where: { name: "setCmd" } });
-    if (!result || result.length === 0) return await message.reply("_*No commands set*_");
+    if (!result || result.length === 0) return await message.reply("_*Aucunes commandes ajoutées.*_");
     const messages = result.map((entry, index) => `_${index + 1}. ${entry.dataValues.message}_`);
     const formattedList = messages.join('\n');
-    return await message.reply("*List Cmd*\n\n" + formattedList);
+    return await message.reply("*Liste des Cmd*\n\n" + formattedList);
 });
