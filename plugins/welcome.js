@@ -1,11 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
-
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -13,7 +11,7 @@ Jarvis - Loki-Xer
 const { System, setData, getData } = require('../lib/');
 
 System({
-    pattern: 'welcome ?(.*)',
+    pattern: 'bienvenu ?(.*)',
     desc: 'set welcome message',
     type: 'greetings',
     fromMe: true,
@@ -21,24 +19,24 @@ System({
     if (!message.isGroup) return;
     const { welcome } = await getData(message.from);
     if (match.toLowerCase() === 'get') {
-        if (!welcome || !welcome.message) return await message.send('*_Not Set Yet_*');
+        if (!welcome || !welcome.message) return await message.send('*_Pas encore prêt_*');
         return await message.send(welcome.message);
     } else if (match.toLowerCase() === 'off') {
         const status = welcome && welcome.status ? welcome.status : 'false';
-        if (status === 'false') return await message.send(`_already deactivated_`);
+        if (status === 'false') return await message.send(`_Déjà désactivé_`);
         await setData(message.jid, welcome.message, 'false', 'welcome');
-        return await message.send('*successfully deactivated*');
+        return await message.send('*Désactivé avec succès*');
     } else if (match.toLowerCase() === 'on') {
         const status = welcome && welcome.status ? welcome.status : 'false';
-        if (status === 'true') return await message.send(`_already activated_`);
+        if (status === 'true') return await message.send(`_Déjà activé_`);
         await setData(message.jid, welcome.message, 'true', 'welcome');
-        return await message.send('*successfully activated*');
+        return await message.send('*Activé avec succès*');
     } else if (match) {
         const status = welcome && welcome.status ? welcome.status : 'true';
         await setData(message.jid, match, status, 'welcome');
-        return await message.send('*successfully set*');
+        return await message.send('*Réglé avec succès*');
     }
-    return await message.reply('_*welcome get*_\n_*welcome* thank you for joining &mention_\n*_welcome false_*');
+    return await message.reply('_*welcome get*_\n_*welcome* merci de vous joindre &mention_\n*_welcome false_*');
 });
 
 System({
@@ -50,22 +48,22 @@ System({
     if (!message.isGroup) return;
     const { exit } = await getData(message.jid);
     if (match.toLowerCase() === 'get') {
-        if (!exit || !exit.message) return await message.send('*_Not Set Yet_*');
+        if (!exit || !exit.message) return await message.send('*_Pas encore prêt_*');
         return await message.send(exit.message);
     } else if (match.toLowerCase() === 'off') {
         const status = exit && exit.status ? exit.status : 'false';
-        if (status === 'false') return await message.send(`_already deactivated_`);
+        if (status === 'false') return await message.send(`_Déjà désactivé_`);
         await setData(message.jid, exit.message, 'false', 'exit');
-        return await message.send('*successfully deactivated*');
+        return await message.send('*Désactivé avec succès*');
     } else if (match.toLowerCase() === 'on') {
         const status = exit && exit.status ? exit.status : 'false';
-        if (status === 'true') return await message.send(`_already activated_`);
+        if (status === 'true') return await message.send(`_Déjà activé_`);
         await setData(message.jid, exit.message, 'true', 'exit');
-        return await message.send('*successfully activated*');
+        return await message.send('*Activé avec succès*');
     } else if (match) {
         const status = exit && exit.status ? exit.status : 'true';
         await setData(message.jid, match, status, 'exit');
-        return await message.send('*successfully set*');
+        return await message.send('*Réglé avec succès*');
     }
-    return await message.reply('_*goodbye get*_\n_*goodbye* thank you for joining &mention_\n*_goodbye false_*');
+    return await message.reply('_*goodbye get*_\n_*goodbye* merci de vous être joint &mention_\n*_goodbye false_*');
 });
