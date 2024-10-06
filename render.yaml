@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: jarvis-md
+    name: kerm-lite-2
     env: node
     branch: main
-    repo: https://github.com/Loki-Xer/jarvis-md.git
+    repo: https://github.com/kgtech-cmr/KERM-LITE-2.git
     buildCommand: npm install
     startCommand: npm start
     plan: free
