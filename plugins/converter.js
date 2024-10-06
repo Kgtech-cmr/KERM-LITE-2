@@ -132,7 +132,7 @@ System({
         });
         ffmpeg.on('error', async (err) => {
             console.error('FFmpeg error:', err);
-            await message.reply("An error occurred during video conversion.");
+            await message.reply("Une erreur s'est produite lors de la conversion vidéo.");
         });
         ffmpeg.run();
 });
@@ -145,7 +145,7 @@ System({
     type: "converter",
 }, async (msg) => {
    if (!(msg.image || msg.reply_message.sticker || msg.reply_message.image)) return await msg.reply("_*Réponds à une photo ou sticker*_");
-   if (msg.reply_message.isAnimatedSticker) return await message.reply("_Reply to a non-animated sticker message_");
+   if (msg.reply_message.isAnimatedSticker) return await message.reply("_Répondre à un message d'autocollant non animé_");
    let media = await msg.downloadMediaMessage(msg.image ? msg : msg.quoted ? msg.reply_message : null);
    let sticker = new Sticker(media, {
         pack: stickerPackNameParts[0], 
@@ -278,7 +278,7 @@ System({
     desc: 'generate ai voices'
 }, async (message, match) => {
    if (match == 'list') 
-   return await message.send(` *Liste des  Aitts*\n\n 1 _rachel_ \n 2 _clyde_ \n 3 _domi_ \n 4 _dave_ \n 5 _fin_ \n 6 _bella_ \n 7 _antoni_ \n 8 _thomas_ \n 9 _charlie_ \n 10 _emily_ \n 11 _elli_ \n 12 _callum_ \n 13 _patrick_ \n 14 _harry_ \n 15 _liam_ \n 16 _dorothy_ \n 17 _josh_ \n 18 _arnold_ \n 19 _charlotte_ \n 20 _matilda_ \n 21 _matthew_ \n 22 _james_ \n 23 _joseph_ \n 24 _jeremy_ \n 25 _michael_ \n 26 _ethan_ \n 27 _gigi_ \n 28 _freya_ \n 29 _grace_ \n 30 _daniel_ \n 31 _serena_ \n 32 _adam_ \n 33 _nicole_ \n 34 _jessie_ \n 35 _ryan_ \n 36 _sam_ \n 37 _glinda_ \n 38 _giovanni_ \n 39 _mimi_ \n`.replace(/├/g, ''));
+   return await message.send(` *Liste des  Aitts*\n\n 1 _rayan_ \n 2 _raphael_ \n 3 _kerm_ \n 4 _dave_ \n 5 _fin_ \n 6 _bella_ \n 7 _antoni_ \n 8 _thomas_ \n 9 _charlie_ \n 10 _emily_ \n 11 _elli_ \n 12 _callum_ \n 13 _patrick_ \n 14 _harry_ \n 15 _liam_ \n 16 _dorothy_ \n 17 _josh_ \n 18 _arnold_ \n 19 _charlotte_ \n 20 _matilda_ \n 21 _matthew_ \n 22 _james_ \n 23 _joseph_ \n 24 _jeremy_ \n 25 _michael_ \n 26 _ethan_ \n 27 _gigi_ \n 28 _freya_ \n 29 _grace_ \n 30 _daniel_ \n 31 _serena_ \n 32 _adam_ \n 33 _nicole_ \n 34 _jessie_ \n 35 _ryan_ \n 36 _sam_ \n 37 _glinda_ \n 38 _giovanni_ \n 39 _mimi_ \n`.replace(/├/g, ''));
    const [v, k] = match.split(/,;|/);
    if (!k) return await message.send(`*_J ai besoin de l ID et d un texte_*\n_exemple_\n\n_*aitts* salut mon sang,adam_\n_*liste aitts*_`)
    const stream = await elevenlabs(match)
@@ -309,7 +309,7 @@ System({
   if (!(message.image || message.video || (message.quoted && (message.reply_message.image || message.reply_message.video)))) return await message.reply('*Reponds a une image/video*');
   const rmap = { 'left': 90, 'right': 180, 'vertical': 'vertical', 'horizontal': 'horizontal' };
   const rtype = match ? match.toLowerCase() : '';
-  if (!rmap.hasOwnProperty(rtype)) return await message.reply('*Need rotation type.*\n_Example: .rotate left, right, vertical, or horizontal_');
+  if (!rmap.hasOwnProperty(rtype)) return await message.reply('*Besoin du type de rotation.*\n_Exemple : .rotate gauche, droite, verticale ou horizontale_');
   const option = rmap[rtype];
   const url = await GraphOrg(await message.reply_message.downloadAndSaveMedia());
   await message.sendFromUrl(IronMan(`ironman/convert/rotate?image=${url}&option=${option}`));
@@ -331,7 +331,7 @@ System({
     desc: "make media into url",
     type: "converter",
 }, async (message, match, m) => {
-    if (!message.reply_message.i || (!message.reply_message.image && !message.reply_message.video && !message.reply_message.audio && !message.reply_message.sticker)) return await message.reply('*Reply to image,video,audio,sticker*');
+    if (!message.reply_message.i || (!message.reply_message.image && !message.reply_message.video && !message.reply_message.audio && !message.reply_message.sticker)) return await message.reply('*Répondre à image, vidéo, audio, autocollant*');
     return await sendUrl(message);
 });
 
@@ -361,21 +361,21 @@ System({
     desc: "to trim audio/video",
     type: "converter",
 }, async (m, text) => {
-    if (!(m.video || (m.quoted && (m.reply_message.audio || m.reply_message.video)))) return m.reply("*Reponds a une video/audio ex: _.trim 1.0,3.0*");
-    if (!text) return m.reply("*J ai besoin d'une requête pourtrim ex: _.trim 1.0,3.0*");
+    if (!(m.video || (m.quoted && (m.reply_message.audio || m.reply_message.video)))) return m.reply("*Reponds a une video/audio ex: .trim 1.0,3.0*");
+    if (!text) return m.reply("*J ai besoin d'une requête pour trim ex: .trim 1.0,3.0*");
     const parts = text.split(',');
     const numberRegex = /^-?\d+(\.\d+)?$/;
     const areValidNumbers = parts.every(part => numberRegex.test(part));
-    if (!areValidNumbers) return m.reply("*Please check your format. The correct format is .trim 1.0,3.0*");
+    if (!areValidNumbers) return m.reply("*Veuillez vérifier votre format. Le format correct est .trim 1.0,3.0*");
     if (m.video && m.reply_message.video) {
         const file = await m.downloadMediaMessage(m.video ? m.msg : m.quoted ? m.reply_message.msg : null);
         const output = await trim(file, parts[0], parts[1]);
-        if (!output) return m.reply("*Please check your format. The correct format is .trim 1.0,3.0*"); 
+        if (!output) return m.reply("*Veuillez vérifier votre format. Le format correct est .trim 1.0,3.0*"); 
         await m.reply(output, {}, "video");
     } else if (m.reply_message.audio) {
         const file = await toVideo(await m.reply_message.downloadAndSave());
         const output = await trim(file, parts[0], parts[1]);
-        if (!output) return m.reply("*Please check your format. The correct format is .trim 1.0,3.0*");
+        if (!output) return m.reply("*Veuillez vérifier votre format. Le format correct est .trim 1.0,3.0*");
         await m.reply(output, { mimetype: "audio/mp4" }, "audio");
     }
 });
@@ -388,10 +388,10 @@ System({
     type: 'converter',
 }, async (message, match, m) => {
     const longUrl = match || message.reply_message.text;
-    if (!longUrl) return await message.reply('*Please provide a URL to shorten.*');
+    if (!longUrl) return await message.reply('*Veuillez fournir une URL à raccourcir.*');
     const response = await bitly(longUrl);
     const shortUrl = response.link;
-    await message.send(`*SHORT URL:* ${shortUrl}`, { quoted: message.data });
+    await message.send(`*LIEN COUR:* ${shortUrl}`, { quoted: message.data });
 });
 
 
@@ -402,7 +402,7 @@ System({
   type: "converter",
 }, async (message, match, m) => {
   match = message.reply_message.text || match;
-  if (!match) return await message.reply("_Je traduis quoi ? *eg: i am fine;fr*_");
+  if (!match) return await message.reply("_Je traduis quoi ? *ex: i am fine;fr*_");
   const text = match.split(";");
   try {
       const result = await translate(text[0], {tld: "co.in", to: text[1] || config.LANG, from: text[2] || "auto" });
