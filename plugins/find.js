@@ -81,7 +81,7 @@ System({
         body: form,
     });
     const { status, metadata } = await res.json();
-    if (status.msg != 'Success') {
+    if (status.msg != 'Succes') {
         return await message.reply(status.msg);
     }
     const { album, release_date, artists, title } = metadata.music[0];
