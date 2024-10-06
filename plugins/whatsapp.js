@@ -175,9 +175,9 @@ System({
     type: 'whatsapp'
 }, async (message, match) => {
     match = match || message.reply_message.text;
-    if (!match) return await message.send('*Besoin d'un nom ! *\n*Exemple : setname your name*.');
+    if (!match) return await message.send(`'*Besoin d'un nom ! *\n*Exemple : setname ton nom*.'`);
     await message.client.updateProfileName(match);
-    await message.reply('_Profile name updated_');
+    await message.reply('_Nom du profil mis à jour_');
 });
 
 System({
@@ -186,13 +186,13 @@ System({
     desc: "Forwards the replied message",
     type: "whatsapp",
 }, async (message, match) => {
-    if (!message.quoted) return await message.reply('Reply to message');
-    if (!match) return await message.reply("*Provide a JID; use 'jid' command to get JID*");
+    if (!message.quoted) return await message.reply('Répondre au message');
+    if (!match) return await message.reply("*Fournir un JID ; utilisez la commande 'jid' pour obtenir JID*");
     let jids = parsedJid(match);
     for (let jid of jids) {
         await message.client.forwardMessage(jid, message.reply_message.message);
     }
-    await message.reply("_Message forwarded_");
+    await message.reply("_Message transmis_");
 });
 
 System({
@@ -201,8 +201,8 @@ System({
     desc: 'Change video or image caption',
     type: 'whatsapp',
 }, async (message, match) => {
-    if (!message.reply_message.video && !message.reply_message.image && !message.image && !message.video) return await message.reply('*_Reply to an image or video_*');
-    if (!match) return await message.reply("*Need a query, e.g., .caption Hello*");
+    if (!message.reply_message.video && !message.reply_message.image && !message.image && !message.video) return await message.reply('*_Répondre à une image ou à une vidéo_*');
+    if (!match) return await message.reply("*Besoin d'une requête, par exemple, .caption Bonjour*");
     await message.client.forwardMessage(message.jid, message.quoted ? message.reply_message.message : message.message, { caption: match });
 });
 
@@ -213,8 +213,8 @@ System({
 	type: 'privacy'
 }, async (message, match) => {
 	const { readreceipts, profile, status, online, last, groupadd, calladd } = await message.client.fetchPrivacySettings(true);
-	const msg = `*♺ my privacy*\n\n*ᝄ name :* ${message.client.user.name}\n*ᝄ online:* ${online}\n*ᝄ profile :* ${profile}\n*ᝄ last seen :* ${last}\n*ᝄ read receipt :* ${readreceipts}\n*ᝄ about seted time :*\n*ᝄ group add settings :* ${groupadd}\n*ᝄ call add settings :* ${calladd}`;
-	let img = await message.client.profilePictureUrl(message.user.jid, 'image').catch(() => "https://i.ibb.co/sFjZh7S/6883ac4d6a92.jpg");
+	const msg = `*♺ Ma vie privée*\n\n*ᝄ nom :* ${message.client.user.name}\n*ᝄ en ligne:* ${online}\n*ᝄ profil :* ${profile}\n*ᝄ Vu pour la dernière fois :* ${last}\n*ᝄ Lire le reçu :* ${readreceipts}\n*ᝄ À propos de l'heure :*\n*ᝄ Groupe ajouter des paramètres :* ${groupadd}\n*ᝄ Appeler ajouter des paramètres :* ${calladd}`;
+	let img = await message.client.profilePictureUrl(message.user.jid, 'image').catch(() => "https://i.imgur.com/8X1vjbQ.jpeg");
 	await message.send(img, { caption: msg }, 'image');
 });
 
@@ -225,11 +225,11 @@ System({
 	desc: 'to change lastseen privacy',
 	type: 'privacy'
 }, async (message, match, m) => {
-	if (!match) return await message.send(`_*Example:-* ${m.prefix} all_\n_to change last seen privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${m.prefix} all_\n_Pour modifier les derniers paramètres de confidentialité vus_`);
 	const available_privacy = ['all', 'contacts', 'contact_blacklist', 'none'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateLastSeenPrivacy(match)
-	await message.send(`_Privacy settings *last seen* Updated to *${match}*_`);
+	await message.send(`_Paramètres de confidentialité *dernière vue* Mise à jour vers *${match}*_`);
 });
 
 
@@ -239,11 +239,11 @@ System({
 	desc: 'to change online privacy',
 	type: 'privacy'
 }, async (message, match, m) => {
-	if (!match) return await message.send(`_*Example:-* ${m.prefix} all_\n_to change *online*  privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${m.prefix} all_\n_Pour modifier les paramètres de confidentialité *en ligne*_`);
 	const available_privacy = ['all', 'match_last_seen'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateOnlinePrivacy(match)
-	await message.send(`_Privacy Updated to *${match}*_`);
+	await message.send(`_Confidentialité Mise à jour vers *${match}*_`);
 });
 
 
@@ -253,11 +253,11 @@ System({
 	desc: 'privacy setting profile picture',
 	type: 'privacy'
 }, async (message, match) => {
-	if (!match) return await message.send(`_*Example:-* ${cmd} all_\n_to change *profile picture*  privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${cmd} all_\n_Pour modifier les paramètres de confidentialité de la *photo de profil*_`);
 	const available_privacy = ['all', 'contacts', 'contact_blacklist', 'none'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateProfilePicturePrivacy(match)
-	await message.send(`_Privacy Updated to *${match}*_`);
+	await message.send(`_Confidentialité Mise à jour vers *${match}*_`);
 });
 
 
@@ -267,11 +267,11 @@ System({
 	desc: 'privacy for my status',
 	type: 'privacy'
 }, async (message, match) => {
-	if (!match) return await message.send(`_*Example:-* ${cmd} all_\n_to change *status*  privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${cmd} all_\n_Pour modifier les paramètres de confidentialité *statut*_`);
 	const available_privacy = ['all', 'contacts', 'contact_blacklist', 'none'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateStatusPrivacy(match)
-	await message.send(`_Privacy Updated to *${match}*_`);
+	await message.send(`_Confidentialité Mise à jour vers *${match}*_`);
 });
 
 
@@ -281,11 +281,11 @@ System({
 	desc: 'privacy for read message',
 	type: 'privacy'
 }, async (message, match, m) => {
-	if (!match) return await message.send(`_*Example:-* ${m.prefix} all_\n_to change *read and receipts message*  privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${m.prefix} all_\n_Pour modifier les paramètres de confidentialité de *message de lecture et de réception*_`);
 	const available_privacy = ['all', 'none'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateReadReceiptsPrivacy(match)
-	await message.send(`_Privacy Updated to *${match}*_`);
+	await message.send(`_Confidentialité Mise à jour vers *${match}*_`);
 });
 
 
@@ -295,9 +295,9 @@ System({
 	desc: 'privacy for group add',
 	type: 'privacy'
 }, async (message, match, m) => {
-	if (!match) return await message.send(`_*Example:-* ${m.prefix} all_\n_to change *group add*  privacy settings_`);
+	if (!match) return await message.send(`_*Exemple:-* ${m.prefix} all_\n_Pour modifier les paramètres de confidentialité *d'ajout de groupe*_`);
 	const available_privacy = ['all', 'contacts', 'contact_blacklist', 'none'];
-	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
+	if (!available_privacy.includes(match)) return await message.send(`_L'action doit être *${available_privacy.join('/')}* Valeurs_`);
 	await message.client.updateGroupsAddPrivacy(match)
-	await message.send(`_Privacy Updated to *${match}*_`);
+	await message.send(`_Confidentialité Mise à jour vers *${match}*_`);
 });
