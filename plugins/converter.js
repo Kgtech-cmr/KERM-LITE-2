@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
+
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -46,8 +46,8 @@ System({
     desc: "Sticker to Image",
     type: "converter",
 }, async (message) => {
-   if (!message.reply_message?.sticker) return await message.reply("_Reply to a sticker_");
-   if (message.reply_message.isAnimatedSticker) return await message.reply("_Reply to a non-animated sticker message_");
+   if (!message.reply_message?.sticker) return await message.reply("_Reponds à un sticker_");
+   if (message.reply_message.isAnimatedSticker) return await message.reply("_Reponds à un message de sticker non-animé _");
    let buffer = await webpToPng(await message.reply_message.downloadAndSave());
    return await message.send(buffer, {}, "image");
 });
@@ -59,7 +59,7 @@ System({
     type: "converter",
 }, async (message, match, m) => {
    if (!(message.reply_message.video || message.reply_message.audio))
-   return await message.reply("_Reply to audio or video_");	
+   return await message.reply("_Reponds à un audio ou video_");	
    var audioResult = await toAudio(await message.reply_message.download());
    const [firstName, author, image] = config.AUDIO_DATA.split(";");
    const aud = await AddMp3Meta(audioResult, await getBuffer(image), { title: firstName, body: author });
@@ -73,7 +73,7 @@ System({
     desc: "video into pvt converter",
     type: "converter",
 }, async (message) => {
-   if (!message.video && !message.reply_message.video) return message.reply("_*Reply to a video*_");
+   if (!message.video && !message.reply_message.video) return message.reply("_*Reponds à une video*_");
    const buff = await message.downloadMediaMessage(message.video ? message.msg : message.quoted ? message.reply_message.msg : null);
    await message.reply(buff, { ptv: true }, "video");
 });
@@ -84,7 +84,7 @@ System({
     desc: "audio into wave",
     type: "converter",
 }, async (message) => {
-   if (!message.quoted || !message.reply_message?.audio && !message.reply_message?.video) return await message.reply("_Reply to an audio/video_");
+   if (!message.quoted || !message.reply_message?.audio && !message.reply_message?.video) return await message.reply("_Reponds à un audio/video_");
    let media = await toAudio(await message.reply_message.download());
    return await message.send(media, { mimetype: 'audio/mpeg', ptt: true, quoted: message.data }, "audio");
 });
@@ -95,8 +95,8 @@ System({
     desc: "Changes sticker to Video",
     type: "converter",
 }, async (message) => {
-   if (!message.reply_message?.sticker) return await message.reply("_Reply to a sticker_");
-   if (!message.reply_message.isAnimatedSticker) return await message.reply("_Reply to an animated sticker message_");
+   if (!message.reply_message?.sticker) return await message.reply("_Reponds à un sticker_");
+   if (!message.reply_message.isAnimatedSticker) return await message.reply("_Reponds à un message de sticker animé_");
    let buffer = await webp2mp4(await message.reply_message.download());
    return await message.send(buffer, {}, "video");
 });
@@ -107,20 +107,20 @@ System({
     desc: "Changes sticker to Gif",
     type: "converter",
 }, async (message) => {
-   if (!message.reply_message?.sticker) return await message.reply("_Reply to a sticker_");
-   if (!message.reply_message.isAnimatedSticker) return await message.reply("_Reply to an animated sticker message_");
+   if (!message.reply_message?.sticker) return await message.reply("_Reponds à un sticker_");
+   if (!message.reply_message.isAnimatedSticker) return await message.reply("_Reponds à un message de sticker animé_");
    const buffer = await webp2mp4(await message.reply_message.download());
    return await message.send(buffer, { gifPlayback: true }, "video");
 });
 
 System({
-    pattern: 'black',
+    pattern: 'noir',
     fromMe: isPrivate,
     desc: 'make audio into black video',
     type: "converter"
 }, async (message) => {
         const ffmpeg = ff();
-        if (!message.reply_message?.audio) return await message.send("_Reply to an audio message_");
+        if (!message.reply_message?.audio) return await message.send("_Reponds à un message audio_");
         const file = './lib/temp/media/black.jpg';
         const audioFile = './lib/temp/audio.mp3';
         fs.writeFileSync(audioFile, await message.reply_message.download());
@@ -144,7 +144,7 @@ System({
     desc: "Changes photo to sticker",
     type: "converter",
 }, async (msg) => {
-   if (!(msg.image || msg.reply_message.sticker || msg.reply_message.image)) return await msg.reply("_*Reply to photo or sticker*_");
+   if (!(msg.image || msg.reply_message.sticker || msg.reply_message.image)) return await msg.reply("_*Réponds à une photo ou sticker*_");
    if (msg.reply_message.isAnimatedSticker) return await message.reply("_Reply to a non-animated sticker message_");
    let media = await msg.downloadMediaMessage(msg.image ? msg : msg.quoted ? msg.reply_message : null);
    let sticker = new Sticker(media, {
@@ -152,7 +152,7 @@ System({
         author: stickerPackNameParts[1], 
         type: StickerTypes.ROUNDED ,
         categories: ["🤩", "🎉"], 
-        id: "https://github.com/Loki-Xer/jarvis-md",
+        id: "https://github.com/Kgtech-cmr/KERM-LITE-2",
         quality: 75, 
    });
    const buffer = await sticker.toBuffer();
@@ -165,7 +165,7 @@ System({
     desc: "converts text to fancy text",
     type: "converter",
  }, (async (message, match) => {    
-    if (!match && !message.reply_message.message) return await message.reply('\n*Fancy text*\n\n*Example:*\n*reply to a text and : fancy 7*\n*or*\n*use : fancy hy 5*\n\n'+String.fromCharCode(8206).repeat(4001)+fancy.list('Text here',fancy));
+    if (!match && !message.reply_message.message) return await message.reply('\n*Texte Fancy*\n\n*Exemple:*\n*reponds à un texte et: fancy 7*\n*ou*\n*utilise: fancy Kerm Lite 5*\n\n'+String.fromCharCode(8206).repeat(4001)+fancy.list('Text here',fancy));
     const id = match.match(/\d/g)?.join('')
      try {
         if (id === undefined && !message.reply_message){
@@ -173,25 +173,25 @@ System({
         }
         return await message.reply(fancy.apply(fancy[parseInt(id)-1], message.reply_message.text || match.replace(id,'')))    
     } catch {
-        return await message.reply('_*No such style :(*_')
+        return await message.reply('_*Pas de style obtenu :(*_')
      }
  }));
 
 System({
-    pattern: "circle",
+    pattern: "cercle",
     fromMe: isPrivate,
     desc: "Changes photo to sticker",
     type: "converter",
 }, async (message) => {
-   if (!(message.image || message.reply_message.sticker || message.reply_message.image)) return await message.reply("_*Reply to photo or sticker*_");
-   if (message.reply_message.isAnimatedSticker) return await message.reply("_Reply to a non-animated sticker message_");
+   if (!(message.image || message.reply_message.sticker || message.reply_message.image)) return await message.reply("_*Reponds à une photo ou sticker*_");
+   if (message.reply_message.isAnimatedSticker) return await message.reply("_Reponds à un sticker non-animé_");
    let media = await message.downloadMediaMessage(message.image ? message : message.quoted ? message.reply_message : null);
    let sticker = new Sticker(media, {
         pack: stickerPackNameParts[0], 
         author: stickerPackNameParts[1], 
         type: StickerTypes.CIRCLE ,
         categories: ["🤩", "🎉"],
-        id: "https://github.com/Loki-Xer/jarvis-md", 
+        id: "https://github.com/Kgtech-cmr/KERM-LITE-2", 
         quality: 75,
    });
   const buffer = await sticker.toBuffer();
@@ -206,14 +206,14 @@ System({
     type: "converter",
 }, async (msg) => {
    if (!(msg.image || msg.reply_message.sticker || msg.reply_message.image)) return await msg.reply("_*Reply to photo or sticker*_");  
-   if (msg.reply_message.isAnimatedSticker) return await msg.reply("_Reply to a non-animated sticker message_");
+   if (msg.reply_message.isAnimatedSticker) return await msg.reply("_Reponds à un sticker non animé_");
    let media = await msg.downloadMediaMessage(msg.image ? msg : msg.quoted ? msg.reply_message : null);
    let sticker = new Sticker(media, {
         pack: stickerPackNameParts[0], 
         author: stickerPackNameParts[1], 
         type: StickerTypes.CROPPED,
         categories: ["🤩", "🎉"],
-        id: "https://github.com/Loki-Xer/jarvis-md", 
+        id: "https://github.com/Kgtech-cmr/KERM-LITE-2", 
         quality: 75, 
    });
    const buffer = await sticker.toBuffer();
@@ -221,13 +221,13 @@ System({
 });
 
 System({
-    pattern: "take",
+    pattern: "prend",
     fromMe: isPrivate,
     desc: "Changes Exif data of stickers",
     type: "converter",
 }, async (message, match) => {
    let data;
-   if (!message.reply_message || (!message.reply_message.sticker && !message.reply_message.audio)) return await message.reply("_Reply to a sticker or audio_");
+   if (!message.reply_message || (!message.reply_message.sticker && !message.reply_message.audio)) return await message.reply("_Reponds a un sticker ou audio_");
    if (message.reply_message.sticker) {
    const stickerPackName = (match || config.STICKER_PACKNAME).split(";");
    await message.send(await message.reply_message.download(), { packname: stickerPackName[0], author: stickerPackName[1] }, "sticker");
@@ -247,7 +247,7 @@ System({
     desc: "_Converts Photo or video to sticker_",
     type: "converter",
 }, async (message, match) => {
-   if (!(message.image || message.video || message.reply_message.video || message.reply_message.image)) return await message.reply("_Reply to photo or video_"); 
+   if (!(message.image || message.video || message.reply_message.video || message.reply_message.image)) return await message.reply("_Reponds à une photo ou video_"); 
    let media = (message.video || message.image)? message.msg : message.quoted? message.reply_message.msg : null;  
    let buff = await message.downloadMediaMessage(media);
    await message.send(buff, { packname: stickerPackNameParts[0], author: stickerPackNameParts[1] }, "sticker");
@@ -260,7 +260,7 @@ System({
     type: "converter",
 }, async (message, match, m) => {
    if (!message.reply_message || !message.reply_message.sticker)
-   return await message.reply("_Reply to sticker_");
+   return await message.reply("_Reponds à un sticker_");
    let img = new Image();
    await img.load(await message.reply_message.download());
    const exif = JSON.parse(img.exif.slice(22).toString());
@@ -278,11 +278,11 @@ System({
     desc: 'generate ai voices'
 }, async (message, match) => {
    if (match == 'list') 
-   return await message.send(` *List of Aitts*\n\n 1 _rachel_ \n 2 _clyde_ \n 3 _domi_ \n 4 _dave_ \n 5 _fin_ \n 6 _bella_ \n 7 _antoni_ \n 8 _thomas_ \n 9 _charlie_ \n 10 _emily_ \n 11 _elli_ \n 12 _callum_ \n 13 _patrick_ \n 14 _harry_ \n 15 _liam_ \n 16 _dorothy_ \n 17 _josh_ \n 18 _arnold_ \n 19 _charlotte_ \n 20 _matilda_ \n 21 _matthew_ \n 22 _james_ \n 23 _joseph_ \n 24 _jeremy_ \n 25 _michael_ \n 26 _ethan_ \n 27 _gigi_ \n 28 _freya_ \n 29 _grace_ \n 30 _daniel_ \n 31 _serena_ \n 32 _adam_ \n 33 _nicole_ \n 34 _jessie_ \n 35 _ryan_ \n 36 _sam_ \n 37 _glinda_ \n 38 _giovanni_ \n 39 _mimi_ \n`.replace(/├/g, ''));
+   return await message.send(` *Liste des  Aitts*\n\n 1 _rachel_ \n 2 _clyde_ \n 3 _domi_ \n 4 _dave_ \n 5 _fin_ \n 6 _bella_ \n 7 _antoni_ \n 8 _thomas_ \n 9 _charlie_ \n 10 _emily_ \n 11 _elli_ \n 12 _callum_ \n 13 _patrick_ \n 14 _harry_ \n 15 _liam_ \n 16 _dorothy_ \n 17 _josh_ \n 18 _arnold_ \n 19 _charlotte_ \n 20 _matilda_ \n 21 _matthew_ \n 22 _james_ \n 23 _joseph_ \n 24 _jeremy_ \n 25 _michael_ \n 26 _ethan_ \n 27 _gigi_ \n 28 _freya_ \n 29 _grace_ \n 30 _daniel_ \n 31 _serena_ \n 32 _adam_ \n 33 _nicole_ \n 34 _jessie_ \n 35 _ryan_ \n 36 _sam_ \n 37 _glinda_ \n 38 _giovanni_ \n 39 _mimi_ \n`.replace(/├/g, ''));
    const [v, k] = match.split(/,;|/);
-   if (!k) return await message.send(`*_need voice id and text_*\n_example_\n\n_*aitts* hey vroh its a test,adam_\n_*aitts list*_`)
+   if (!k) return await message.send(`*_J ai besoin de l ID et d un texte_*\n_exemple_\n\n_*aitts* salut mon sang,adam_\n_*liste aitts*_`)
    const stream = await elevenlabs(match)
-   if (!stream) return await message.send(`_*please upgrade your api key*_\n_get key from http://docs.elevenlabs.io/api-reference/quick-start/introduction_\n_example_\n\nsetvar elvenlabs: your key\n_or update your config.js manually_`);
+   if (!stream) return await message.send(`_*S il vous plaît mettez à jour votre Clé API*_\n_get key from http://docs.elevenlabs.io/api-reference/quick-start/introduction_\n_example_\n\nsetvar elvenlabs: your key\n_or update your config.js manually_`);
    return await message.send({ stream }, { mimetype: 'audio/mpeg' }, 'audio');
 });
 
@@ -293,7 +293,7 @@ System({
     fromMe: isPrivate
 }, async (message, match) => {
     match = (match || "converted media").replace(/[^A-Za-z0-9]/g,'-');
-    if (!(message.image || message.video || (message.quoted && (message.reply_message.image || message.reply_message.audio || message.reply_message.video)))) return message.send("_*Reply to a video/audio/image message!*_");
+    if (!(message.image || message.video || (message.quoted && (message.reply_message.image || message.reply_message.audio || message.reply_message.video)))) return message.send("_*Reponds a une video/audio/image message!*_");
     let msg = (message.video || message.image)? message.msg : message.quoted? message.reply_message.msg : null;  
     let media = await message.downloadMediaMessage(msg);
     const { ext, mime } = await fromBuffer(media);
@@ -301,12 +301,12 @@ System({
 });
 
 System({
-  pattern: 'rotate ?(.*)',
+  pattern: 'rotation ?(.*)',
   fromMe: isPrivate,
   desc: 'Rotate image or video in any direction',
   type: 'converter'
 }, async (message, match) => {
-  if (!(message.image || message.video || (message.quoted && (message.reply_message.image || message.reply_message.video)))) return await message.reply('*Reply to an image/video*');
+  if (!(message.image || message.video || (message.quoted && (message.reply_message.image || message.reply_message.video)))) return await message.reply('*Reponds a une image/video*');
   const rmap = { 'left': 90, 'right': 180, 'vertical': 'vertical', 'horizontal': 'horizontal' };
   const rtype = match ? match.toLowerCase() : '';
   if (!rmap.hasOwnProperty(rtype)) return await message.reply('*Need rotation type.*\n_Example: .rotate left, right, vertical, or horizontal_');
@@ -322,7 +322,7 @@ System({
     fromMe: true
 }, async (message, match) => {
     if (!(message.image && message.video && (message.quoted && (message.reply_message.image || message.reply_message.audio || message.reply_message.video)))) return await message.client.forwardMessage(message.jid, message.image || message.video? message : message.reply_message, { viewOnce: true });
-    await message.reply("_*Reply to an image, video, or audio to make it viewable*_");
+    await message.reply("_*Réponds a une image, video, ou audio pour le mettre en vue unique*_");
 });
 
 System({
@@ -344,13 +344,13 @@ System({
 }, async (m, match) => {
    if (match && match.includes("key")) {
         await setData(m.user.id, match.split(":")[1].trim(), "true", "removeBg");
-        return m.reply("*Key added successfully. Now you can use rbg.*");
+        return m.reply("*Votre clé a bien été ajoutée. Vous pouvez désormais utiliser le removeBG.*");
     }
     if (!m.image && !m.reply_message.image) return m.reply("*Reply to an image*");
     const db = await getData(m.user.id);
-    if (!db.removeBg) return await m.send("https://graph.org/file/dc22fb232b0092e6326ec.png", { type: "image", value: [{ name: "cta_url", display_text: "Sign in", url: "https://accounts.kaleido.ai/users/sign_in", merchant_url: "https://accounts.kaleido.ai/users/sign_in", action: "url", icon: "", style: "link" }, { name: "cta_url", display_text: "Get API Key", url: "https://www.remove.bg/dashboard#api-key", merchant_url: "https://www.remove.bg/dashboard#api-key", action: "url", icon: "", style: "link" }], body: "", footer: "*JARVIS-MD*", title: `\nDear user, get an API key to use this command. Sign in to remove.bg and get an API key. After that, use \n\n *${m.prefix} rbg key: _your API key_*\n` }, "button");
+    if (!db.removeBg) return await m.send("https://graph.org/file/dc22fb232b0092e6326ec.png", { type: "image", value: [{ name: "cta_url", display_text: "Sign in", url: "https://accounts.kaleido.ai/users/sign_in", merchant_url: "https://accounts.kaleido.ai/users/sign_in", action: "url", icon: "", style: "link" }, { name: "cta_url", display_text: "Get API Key", url: "https://www.remove.bg/dashboard#api-key", merchant_url: "https://www.remove.bg/dashboard#api-key", action: "url", icon: "", style: "link" }], body: "", footer: "*Kerm-MD*", title: `\nCher utilisateur, procurez-vous une clé API pour utiliser cette commande. Connectez-vous à Remove.bg et obtenez une clé API. Après cela, utilisez \n\n *${m.prefix} clé rbg : _votre clé API_*\n` }, "button");
     let buff = await removeBg(await m.downloadAndSaveMediaMessage(m.image ? m.msg : m.quoted ? m.reply_message.msg : null), db.removeBg.message);
-    if(!buff) return m.reply("*Error in api key or can't upload to remove.bg*");
+    if(!buff) return m.reply("*Erreur*");
     await m.reply(buff, {}, "image");
 });
 
@@ -361,8 +361,8 @@ System({
     desc: "to trim audio/video",
     type: "converter",
 }, async (m, text) => {
-    if (!(m.video || (m.quoted && (m.reply_message.audio || m.reply_message.video)))) return m.reply("*Reply to a video/audio e.g. _.trim 1.0,3.0*");
-    if (!text) return m.reply("*Need query to trim e.g.: _.trim 1.0,3.0*");
+    if (!(m.video || (m.quoted && (m.reply_message.audio || m.reply_message.video)))) return m.reply("*Reponds a une video/audio ex: _.trim 1.0,3.0*");
+    if (!text) return m.reply("*J ai besoin d'une requête pourtrim ex: _.trim 1.0,3.0*");
     const parts = text.split(',');
     const numberRegex = /^-?\d+(\.\d+)?$/;
     const areValidNumbers = parts.every(part => numberRegex.test(part));
@@ -402,7 +402,7 @@ System({
   type: "converter",
 }, async (message, match, m) => {
   match = message.reply_message.text || match;
-  if (!match) return await message.reply("_provide text to translate *eg: i am fine;ml*_");
+  if (!match) return await message.reply("_Je traduis quoi ? *eg: i am fine;fr*_");
   const text = match.split(";");
   try {
       const result = await translate(text[0], {tld: "co.in", to: text[1] || config.LANG, from: text[2] || "auto" });
