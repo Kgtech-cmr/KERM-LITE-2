@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the GPL-3.0 License; you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -16,10 +16,10 @@ System({
     type: "whatsapp",
 }, async (message) => {
     if (!message.reply_message || !message.reply_message.image)
-        return await message.reply("_Reply to a photo__");
+        return await message.reply("_Répondre à une photo_");
     let buff = await message.reply_message.download();
     await message.setPP(message.user.jid, buff);
-    return await message.reply("_Profile Picture Updated__");
+    return await message.reply("_Photo de profil mise à jour_");
 });
 
 System({
@@ -40,26 +40,26 @@ System({
 }, async (message, match) => {
     if (match === "remove") {
         await message.client.removeProfilePicture(message.user.jid);
-        return await message.reply("_Profile Picture Removed_");
+        return await message.reply("_Photo de profil supprimée_");
     }
     if (!message.reply_message || !message.reply_message.image) return await message.reply("_Reply to a photo_");
     let media = await message.reply_message.download();
     await message.client.updateProfile(media, message.user.jid);
-    return await message.reply("_Profile Picture Updated!_");
+    return await message.reply("_Photo de profil mise à jour!_");
 });
 
 System({
-    pattern: "dlt",
+    pattern: "supp",
     fromMe: true,
     desc: "Deletes a message",
     type: "whatsapp",
 }, async (message) => {
-    if (!message.quoted) return await message.reply("_Reply to a message to delete it!_");
+    if (!message.quoted) return await message.reply("_Répondre à un message pour le supprimer!_");
     await message.client.sendMessage(message.chat, { delete: message.reply_message.data.key });
 });
 
 System({
-	pattern: 'clear ?(.*)',
+	pattern: 'nettoie ?(.*)',
 	fromMe: true,
 	desc: 'delete whatsapp chat',
 	type: 'whatsapp'
@@ -71,7 +71,7 @@ System({
 			messageTimestamp: message.messageTimestamp
 		}]
 	}, message.jid)
-	await message.reply('_Cleared.._')
+	await message.reply('_Effacé.._')
 });
 
 System({
@@ -89,11 +89,11 @@ System({
 		archive: true,
 		lastMessages: [lstMsg]
 	}, message.jid);
-	await message.reply('_Archived.._')
+	await message.reply('_Archivé.._')
 });
 
 System({
-	pattern: 'unarchive ?(.*)',
+	pattern: 'desarchive ?(.*)',
 	fromMe: true,
 	desc: 'unarchive whatsapp chat',
 	type: 'whatsapp'
@@ -107,11 +107,11 @@ System({
 		archive: false,
 		lastMessages: [lstMsg]
 	}, message.jid);
-	await message.reply('_Unarchived.._')
+	await message.reply('_Non archivé.._')
 });
 
 System({
-	pattern: 'chatpin ?(.*)',
+	pattern: 'epingler ?(.*)',
 	fromMe: true,
 	desc: 'pin a chat',
 	type: 'whatsapp'
@@ -119,11 +119,11 @@ System({
 	await message.client.chatModify({
 		pin: true
 	}, message.jid);
-	await message.reply('_Pined.._')
+	await message.reply('_Épinglé.._')
 });
 
 System({
-	pattern: 'unpin ?(.*)',
+	pattern: 'desepingler ?(.*)',
 	fromMe: true,
 	desc: 'unpin a msg',
 	type: 'whatsapp'
@@ -131,29 +131,29 @@ System({
 	await message.client.chatModify({
 		pin: false
 	}, message.jid);
-	await message.reply('_Unpined.._')
+	await message.reply('_Non épinglé.._')
 });
 
 System({
-    pattern: "block",
+    pattern: "blocker",
     fromMe: true,
     desc: "Block a user",
     type: "whatsapp",
 }, async (message) => {
     let jid = message.quoted ? message.reply_message.sender : message.jid;
     await message.client.updateBlockStatus(jid, "block");
-    await message.reply("_*Blocked!*_");
+    await message.reply("_*Bloqué!*_");
 });
 
 System({
-    pattern: "unblock",
+    pattern: "debloquer",
     fromMe: true,
     desc: "Unblock a user",
     type: "whatsapp",
 }, async (message) => {
     let jid = message.quoted ? message.reply_message.sender : message.jid;
     await message.client.updateBlockStatus(jid, "unblock");
-    await message.reply("_*Unblocked!*_");
+    await message.reply("_*Debloqué!*_");
 });
 
 System({
@@ -163,9 +163,9 @@ System({
     type: "whatsapp",
 }, async (message, match) => {
     match = match || message.reply_message.text;
-    if (!match) return await message.send('*Need Status!*\n*Example: setbio Hey there! I am using WhatsApp*.');
+    if (!match) return await message.send(`'*Besoin d'un statut ! *\n*Exemple : setbio Salut ! J'utilise WhatsApp*.'`);
     await message.client.updateProfileStatus(match);
-    await message.reply('_Profile bio updated_');
+    await message.reply('_Biographie du profil mise à jour_');
 });
 
 System({
@@ -175,7 +175,7 @@ System({
     type: 'whatsapp'
 }, async (message, match) => {
     match = match || message.reply_message.text;
-    if (!match) return await message.send('*Need Name!*\n*Example: setname your name*.');
+    if (!match) return await message.send('*Besoin d'un nom ! *\n*Exemple : setname your name*.');
     await message.client.updateProfileName(match);
     await message.reply('_Profile name updated_');
 });
