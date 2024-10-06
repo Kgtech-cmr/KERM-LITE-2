@@ -1,11 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
-
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -32,12 +30,12 @@ System({
         }
         
         if (msg) {
-            return await message.reply('_Mention Updated__');
+            return await message.reply('_Mention Mise À Jour_');
         } else {
-            return await message.reply('_Error in updating__');
+            return await message.reply('_Erreur lors de la mise à jour__');
         }
     }
-    return await message.reply("_You can check the format of mention https://github.com/Loki-Xer/Jarvis-md/wiki_");
+    return await message.reply("_Vous pouvez vérifier le format de la mention https://github.com/Kgtech-cmr/KERM-LITE-2/wiki_");
 });
 
 System({
@@ -48,21 +46,21 @@ System({
 }, async (message, match) => {
     if (match === "off") {
     await setData(message.user.id, "disactie", "false", "autoreaction");
-    await message.reply("_*autoreaction disabled*__");
+    await message.reply("_*Réaction automatique désactivée*_");
     } else if (match === "on") {
     await setData(message.user.id, "actie", "true", "autoreaction");
-    await message.reply("_*autoreaction enabled*__");
+    await message.reply("_*Réaction automatique activée*_");
     } else if (!match) {
     if (message.isGroup) {
       await message.send("\nChoose one to update autoreaction\n",
                 { values: [
-                    { displayText: "on", id: "autoreaction on" },
-                    { displayText: "off", id: "autoreaction off" }
+                    { displayText: "oui", id: "autoreaction oui" },
+                    { displayText: "non", id: "autoreaction non" }
                 ],
                 withPrefix: true,
                 participates: [message.sender]
             }, "poll");
     } else {
-        await message.reply("_*autoreaction on/off*__");
+        await message.reply("_*Réaction automatique oui/non*_");
     }}
 });
