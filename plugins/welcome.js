@@ -22,25 +22,25 @@ System({
         if (!welcome || !welcome.message) return await message.send('*_Pas encore prêt_*');
         return await message.send(welcome.message);
     } else if (match.toLowerCase() === 'off') {
-        const status = welcome && welcome.status ? welcome.status : 'false';
+        const status = welcome && welcome.status ? welcome.status : 'non';
         if (status === 'false') return await message.send(`_Déjà désactivé_`);
         await setData(message.jid, welcome.message, 'false', 'welcome');
         return await message.send('*Désactivé avec succès*');
     } else if (match.toLowerCase() === 'on') {
-        const status = welcome && welcome.status ? welcome.status : 'false';
+        const status = welcome && welcome.status ? welcome.status : 'non';
         if (status === 'true') return await message.send(`_Déjà activé_`);
         await setData(message.jid, welcome.message, 'true', 'welcome');
         return await message.send('*Activé avec succès*');
     } else if (match) {
-        const status = welcome && welcome.status ? welcome.status : 'true';
+        const status = welcome && welcome.status ? welcome.status : 'oui';
         await setData(message.jid, match, status, 'welcome');
         return await message.send('*Réglé avec succès*');
     }
-    return await message.reply('_*welcome get*_\n_*welcome* merci de vous joindre &mention_\n*_welcome false_*');
+    return await message.reply('_*bienvenu get*_\n_*bienvenu* merci de vous joindre &mention_\n*_bienvenu non_*');
 });
 
 System({
-    pattern: 'goodbye ?(.*)',
+    pattern: 'aurevoir ?(.*)',
     desc: 'set goodbye message',
     type: 'greetings',
     fromMe: true,
@@ -51,19 +51,19 @@ System({
         if (!exit || !exit.message) return await message.send('*_Pas encore prêt_*');
         return await message.send(exit.message);
     } else if (match.toLowerCase() === 'off') {
-        const status = exit && exit.status ? exit.status : 'false';
+        const status = exit && exit.status ? exit.status : 'non';
         if (status === 'false') return await message.send(`_Déjà désactivé_`);
         await setData(message.jid, exit.message, 'false', 'exit');
         return await message.send('*Désactivé avec succès*');
     } else if (match.toLowerCase() === 'on') {
-        const status = exit && exit.status ? exit.status : 'false';
+        const status = exit && exit.status ? exit.status : 'oui';
         if (status === 'true') return await message.send(`_Déjà activé_`);
         await setData(message.jid, exit.message, 'true', 'exit');
         return await message.send('*Activé avec succès*');
     } else if (match) {
-        const status = exit && exit.status ? exit.status : 'true';
+        const status = exit && exit.status ? exit.status : 'oui';
         await setData(message.jid, match, status, 'exit');
         return await message.send('*Réglé avec succès*');
     }
-    return await message.reply('_*goodbye get*_\n_*goodbye* merci de vous être joint &mention_\n*_goodbye false_*');
+    return await message.reply('_*aurevoir get*_\n_*aurevoir* merci de vous être joint &mention_\n*_aurevoir non_*');
 });
