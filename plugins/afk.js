@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -28,22 +27,22 @@ System({
 	if (!AFK.isAfk)  return;
 	if(!message.mention.isBotNumber && !message.reply_message.i && message.isGroup)  return;
 	if (message.mention.isBotNumber && message.isGroup) {
-   	    await message.send('```This is a bot. My owner is not here at the moment```\n' +
-		              (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') +
-		    	      (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
+   	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+		              (AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
+		    	      (AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 			      quoted: message.data
 			    });
 	} else if (message.isGroup && message.reply_message.sender == message.user.jid) {
-	    await message.send('```This is a bot. My owner is not here at the moment```\n' +
-			      (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') +
-			      (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
+	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+			      (AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
+			      (AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 			      quoted: message.data
 			   });
 
 	} else if(!message.isGroup) {
-	    await message.send('```This is a bot. My owner is not here at the moment```\n' +
-				(AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') +
-				(AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
+	    await message.send('```Ceci est un message du bot. Salut à vous! mon propriétaire n'est malheureusement pas là pour le moment.⏰```\n' +
+				(AFK.reason !== false ? '\n*Raison:* ```' + AFK.reason + '```' : '') +
+				(AFK.lastseen !== 0 ? '\n*Dernière présence:* ```' + secondsToHms(Math.round((new Date()).getTime() / 1000) - AFK.lastseen) + '```' : ''), {
 				quoted: message.data
 			      });
 	}
@@ -59,7 +58,7 @@ System({
 	AFK.lastseen = 0;
 	AFK.reason = false;
 	AFK.isAfk = false;
-	await message.send('```I am not AFK anymore!```');
+	await message.send('```Euh...Je ne suis plus AFK!🙍🏾```');
 });
 
 System({
@@ -72,5 +71,5 @@ System({
 	AFK.lastseen = Math.round((new Date()).getTime() / 1000);
 	if (match !== '') AFK.reason = match;
 	AFK.isAfk = true;
-	await message.send(AFK.reason ? '*_Im AFK now!_*\n*Reason:* ' + AFK.reason :  '*_Im AFK now!_*');
+	await message.send(AFK.reason ? '*Je suis AFK maintenant!_*\n*Raison:* ' + AFK.reason :  '*_Je suis AFK maintenant!_*');
 });
