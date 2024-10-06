@@ -1,11 +1,9 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Copyright (C) 2023 Loki - Xer.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Jarvis - Loki-Xer 
-
+Copyright (C) 2024 Kgtech-cmr.
+Sous licence GPL-3.0 ; vous ne pouvez pas utiliser ce fichier sauf en conformité avec la licence sous peine de poursuites judiciaires.
+Kgtech-cmr.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -34,8 +32,8 @@ System({
     type: 'info',
     dontAddCommandList: true,
 }, async (message, match) => {
-    let [date, time] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
-    let menu = `╭━━━〔 ${BOT_INFO.split(';')[0]} ⁩〕━━━···▸\n┃╭──────────────···▸\n✧│ *ᴏᴡɴᴇʀ :*  ${BOT_INFO.split(';')[1]}\n✧│ *ᴜsᴇʀ :* ${message.pushName.replace(/[\r\n]+/gm, "")}\n✧│ *ᴘʟᴜɢɪɴs :* ${plugins.commands.length}\n✧│ *ᴅᴀᴛᴇ :* ${date}\n✧│ *ᴛɪᴍᴇ :* ${time}\n✧│ *ᴜᴘᴛɪᴍᴇ :* ${clockString(uptime())}\n✧│ *ᴠᴇʀsɪᴏɴ :* ᴠ${version}\n┃╰──────────────···▸\n╰━━━━━━━━━━━━━━━···▸\n\n\n${await readMore()}\n╭━━━━━━━━━━━━━━━···▸\n╽`;
+    let [date, time] = new Date().toLocaleString("en-IN", { timeZone: "Africa/Cameroon" }).split(",");
+    let menu = `╭━━━〔 ${BOT_INFO.split(';')[0]} ⁩〕━━━···▸\n┃╭──────────────···▸\n✧│ *Pʀᴏᴘʀɪᴏ :*  ${BOT_INFO.split(';')[1]}\n✧│ *Uᴛɪʟɪsᴀᴛᴇᴜʀ :* ${message.pushName.replace(/[\r\n]+/gm, "")}\n✧│ *ᴘʟᴜɢɪɴs :* ${plugins.commands.length}\n✧│ *ᴅᴀᴛᴇ :* ${date}\n✧│ *Tᴇᴍᴘs :* ${time}\n✧│ *ᴜᴘᴛɪᴍᴇ :* ${clockString(uptime())}\n✧│ *ᴠᴇʀsɪᴏɴ :* ᴠ${version}\n┃╰──────────────···▸\n╰━━━━━━━━━━━━━━━···▸\n\n\n${await readMore()}\n╭━━━━━━━━━━━━━━━···▸\n╽`;
     let cmnd = [], category = [];
     for (const command of plugins.commands) {
         const cmd = command.pattern?.toString().match(/(\W*)([A-Za-züşiğ öç1234567890]*)/)?.[2];
@@ -56,7 +54,7 @@ System({
             typ = cmmd.toUpperCase();
         }
         
-        menu += `\n┃  ╭─────────────┅┄▻\n┃  │  *➻ ${typ}*\n┃  ╰┬────────────┅┄▻\n┃  ┌┤`;
+        menu += `\n┃  ╭─────────────┅┄▻\n┃  │  *➯ ${typ}*\n┃  ╰┬────────────┅┄▻\n┃  ┌┤`;
         for (const { cmd, type } of cmnd.filter(({ type }) => type === cmmd)) {
             let ptrn;
             if (ptrnFont && ptrnFont !== '0') {
@@ -64,11 +62,11 @@ System({
             } else {
                 ptrn = cmd.charAt(0).toUpperCase() + cmd.slice(1).toLowerCase();
             }
-            menu += `\n┃  │ ‣ ${ptrn}`;
+            menu += `\n┃  │ ➪ ${ptrn}`;
         }
         menu += `\n┃  ╰─────────────···▸`;
     }
-    menu += ` ╰━━━━━━━━━━━┈⊷\nmade with 🤍`;
+    menu += ` ╰━━━━━━━━━━━┈⊷\n> Rᴀʏᴀɴ & Gɪꜰꜰᴀʀᴇɴᴏ🇨🇲`;
     const url = BOT_INFO.split(';')[2];
     if (isUrl(url)) await message.sendFromUrl(url, { caption: menu });
     else await message.send(menu);
@@ -93,7 +91,7 @@ System({
     });
     if (MEDIA_DATA) {
         const [title, body, thumbnail] = MEDIA_DATA.split(";");
-        await message.client.sendMessage(message.jid, { text: menu, contextInfo: { externalAdReply: { title, body, thumbnailUrl: thumbnail, renderLargerThumbnail: true, mediaType: 1, mediaUrl: '', sourceUrl: "https://github.com/Loki-Xer/Jarvis-md", showAdAttribution: true } } });
+        await message.client.sendMessage(message.jid, { text: menu, contextInfo: { externalAdReply: { title, body, thumbnailUrl: thumbnail, renderLargerThumbnail: true, mediaType: 1, mediaUrl: '', sourceUrl: "https://github.com/Kgtech-cmr/KERM-LITE-2", showAdAttribution: true } } });
     } else {
         await message.send(menu);
     }
